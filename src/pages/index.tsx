@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Button } from "../components/form/Button";
 import { Input } from "../components/form/Input";
 
 export default function Home(): JSX.Element {
@@ -34,15 +35,7 @@ export default function Home(): JSX.Element {
 
       <Box />
 
-      <Button
-        color="white"
-        background="purple.600"
-        _hover={{
-          background: "purple.700"
-        }}
-      >
-        Entrar
-      </Button>
+      <Button>Entrar</Button>
     </Stack>
    </Flex>
   );
