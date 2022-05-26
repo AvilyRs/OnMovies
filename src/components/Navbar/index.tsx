@@ -1,29 +1,34 @@
-import { Flex, Heading, Icon } from "@chakra-ui/react";
+import { Box, Flex, Heading, Icon } from "@chakra-ui/react";
+import Link from "next/link";
 import { FiLogOut } from "react-icons/fi";
 import { Button } from "../form/Button";
 
 export function Navbar(): JSX.Element {
   return (
-    <Flex
-      p="4"
-      px="20"
-      align="center"
-      justify="space-between"
-      background="gray.800"
-    >
-      <Heading
-      color="purple.600"
-      fontSize="2xl"
+    <Box background="gray.800">
+      <Flex
+        p="4"
+        align="center"
+        justify="space-between"
+        maxWidth={1200}
+        mx="auto"
       >
-        OnMovies
-      </Heading>
+        <Heading
+        color="purple.600"
+        fontSize="2xl"
+        >
+          <Link href="/">
+            OnMovies
+          </Link>
+        </Heading>
 
 
-      <Flex>
-        <Button variant="ghost">
-          Sair <Icon ml="2" as={FiLogOut} />
-        </Button>
+        <Box>
+          <Button variant="ghost">
+            Sair <Icon ml="2" as={FiLogOut} />
+          </Button>
+        </Box>
       </Flex>
-    </Flex>
+    </Box>
   );
 }
