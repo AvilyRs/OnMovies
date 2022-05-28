@@ -1,9 +1,11 @@
-import { Box, Flex, Heading, Icon } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Icon } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FiLogOut } from "react-icons/fi";
-import { Button } from "../form/Button";
 
 export function Navbar(): JSX.Element {
+  const router = useRouter();
+  
   return (
     <Box background="gray.800">
       <Flex
@@ -24,7 +26,16 @@ export function Navbar(): JSX.Element {
 
 
         <Box>
-          <Button variant="ghost">
+          <Button
+            background="whiteAlpha.200"
+            _hover={{
+              background: "whiteAlpha.300"
+            }}
+            _active={{
+              background: "whiteAlpha.100"
+            }}
+            onClick={() => router.replace("/")}
+          >
             Sair <Icon ml="2" as={FiLogOut} />
           </Button>
         </Box>
