@@ -10,9 +10,9 @@ Plataforma totalmente voltada ao gerenciamento de filmes e séries, proporcionan
 
 ### Features
 
-- *:pencil: ~Tela de login (Com validação)*
+- *:pencil: :beetle: Tela de login (Com validação)*
 - *:pencil: Listagem de filmes*
-- *:pencil: ~Edição de filmes (Com validação)*
+- *:pencil: :beetle: Edição de filmes (Com validação)*
 - *:pencil: Responsividade*
 
 ### Tecnologias
