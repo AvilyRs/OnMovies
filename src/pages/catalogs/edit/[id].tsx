@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, useMediaQuery } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { HTMLInputTypeAttribute, InputHTMLAttributes, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Button } from "../../../components/form/Button";
 import { Input } from "../../../components/form/Input";
 import { PageTemplate } from "../../../components/templates/PageTemplate";
@@ -85,9 +85,7 @@ export default function Edit(): JSX.Element {
               placeholder="Ex. Um Novo Amanhecer"
               type="text"
               value={title}
-              onChange={
-                (target: InputHTMLAttributes<HTMLInputTypeAttribute>
-                ) => setTitle(target.value)}
+              onChange={(field: FormEvent<HTMLInputElement>) => setTitle(field.currentTarget.value)}
             />
             <Input
               name="release-year"
@@ -95,9 +93,7 @@ export default function Edit(): JSX.Element {
               placeholder="Ex. 2022"
               type="text"
               value={releaseDate}
-              onChange={
-                (target: InputHTMLAttributes<HTMLInputTypeAttribute>
-                ) => setReleaseDate(target.value)}
+              onChange={(field: FormEvent<HTMLInputElement>) => setReleaseDate(field.currentTarget.value)}
             />
             <Input
               name="vote-average"
@@ -105,9 +101,7 @@ export default function Edit(): JSX.Element {
               placeholder="5,60"
               type="number"
               value={voteAverage}
-              onChange={
-                (target: InputHTMLAttributes<HTMLInputTypeAttribute>
-                ) => setVoteAverage(target.value)}
+              onChange={(field: FormEvent<HTMLInputElement>) => setVoteAverage(field.currentTarget.value)}
             />
           </Stack>
           <Button type="submit" mt="10">Salvar Alterações</Button>
