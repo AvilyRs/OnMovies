@@ -1,11 +1,12 @@
 import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
-import { MovieCard } from "../components/MovieCard";
-import { PageTemplate } from "../components/templates/PageTemplate";
-import data from "../mocks/movies.json";
-import { getDate } from "../utils/date";
-
+import { MovieCard } from "../../components/MovieCard";
+import { PageTemplate } from "../../components/templates/PageTemplate";
+import { useCatalog } from "../../hooks/useCatalog";
+import { getDate } from "../../utils/date";
 
 export default function Catalogs(): JSX.Element {
+  const { movies } = useCatalog();
+
   const [isMaxWidth1000] = useMediaQuery("(max-width: 1000px)");
   const [isMaxWidth740] = useMediaQuery("(max-width: 740px)");
   const [isMaxWidth540] = useMediaQuery("(max-width: 540px)");
@@ -32,13 +33,14 @@ export default function Catalogs(): JSX.Element {
         templateColumns={getTemplateColumns()}
         gap={6}
       >
-        {data.movies.map(movie => (
+        {movies.map(movie => (
           <GridItem key={movie.id}>
             <MovieCard
+              id={movie.id}
               title={movie.title}
-              poster={movie.poster_path}
-              releaseDate={String(getDate(movie.release_date).getFullYear())}
-              voteAverage={movie.vote_average}
+              poster={movie.poster}
+              releaseDate={String(getDate(movie.releaseDate).getFullYear())}
+              voteAverage={movie.voteAverage}
             />
           </GridItem>
         ))}

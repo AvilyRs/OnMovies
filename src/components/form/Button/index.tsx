@@ -5,6 +5,7 @@ export function Button({ children, variant, ...rest }: ButtonProps): JSX.Element
   return (
     <ChakraButton
       color="white"
+      p="6"
       background={variant !== "ghost" && "purple.600"}
       _hover={{
         background: "purple.700"

@@ -5,4 +5,5 @@ export interface PageTemplateProps {
   section?: {
     title: string;
   }
+  isDetails?: boolean;
 }

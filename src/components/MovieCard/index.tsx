@@ -4,6 +4,7 @@ import { FiHeart } from "react-icons/fi";
 import { MovieCardProps } from "./interface";
 
 export function MovieCard({
+  id,
   title,
   poster,
   releaseDate,
@@ -12,7 +13,7 @@ export function MovieCard({
   const [isMaxWidth420] = useMediaQuery("(max-width: 420px)");
 
   return (
-    <Link href="/">
+    <Link href={`/catalogs/edit/${id}`}>
       <ChakraLink
         _hover={{
           textDecoration: "none"
