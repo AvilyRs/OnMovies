@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, useMediaQuery } from "@chakra-ui/react";
+import { Box, Flex, Stack, useMediaQuery, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { Button } from "../../../components/form/Button";
@@ -6,32 +6,60 @@ import { Input } from "../../../components/form/Input";
 import { PageTemplate } from "../../../components/templates/PageTemplate";
 import { useCatalog } from "../../../hooks/useCatalog";
 import { Movie } from "../../../hooks/useCatalog/interface";
+import { editSchema } from "../../../schemas/edit.schema";
 import { getDate } from "../../../utils/date";
-import { InputTypesProps } from "./interface";
+import { EditProps, InputTypesProps } from "./interface";
 
 export default function Edit(): JSX.Element {
-  
   const router = useRouter();
   const { id } = router.query;
   
   const [isMaxWidth420] = useMediaQuery("(max-width: 420px)");
   
+  const toast = useToast();
   const { movies } = useCatalog();
   const [movie, setMovie] = useState<Movie>({} as Movie);
   const [title, setTitle] = useState<InputTypesProps>("");
   const [releaseDate, setReleaseDate] = useState<InputTypesProps>("");
   const [voteAverage, setVoteAverage] = useState<InputTypesProps>("");
 
+  async function editValidate(data: EditProps): Promise<boolean> {
+    try {
+      await editSchema.validate(data);
+      toast({
+        title: "Sucesso!",
+        description: "Filme editado com sucesso",
+        status: "success",
+        duration: 3000,
+        position: "top-right"
+      });
+      return true;
+    } catch(err) {
+      err.errors.forEach(message => {
+        toast({
+          title: "Oops!",
+          description: message,
+          status: "error",
+          duration: 3000,
+          position: "top-right"
+        });
+      });
+      return false;
+    }
+  }
+
   function handleSubmitEdit() {
     const data = {
       title,
       releaseDate,
       voteAverage
+    } as EditProps;
+
+    const isValidated = editValidate(data);
+
+    if (isValidated) {
+      console.log(data);
     }
-
-    console.log(data);
-
-    return data;
   }
 
   useEffect(() => {
@@ -57,8 +85,6 @@ export default function Edit(): JSX.Element {
         maxWidth={590}
       >
         <Flex
-          as="form"
-          onSubmit={handleSubmitEdit}
           height={320}
           width="100%"
           position="relative"
@@ -104,7 +130,7 @@ export default function Edit(): JSX.Element {
               onChange={(field: FormEvent<HTMLInputElement>) => setVoteAverage(field.currentTarget.value)}
             />
           </Stack>
-          <Button type="submit" mt="10">Salvar Alterações</Button>
+          <Button onClick={handleSubmitEdit} mt="10">Salvar Alterações</Button>
         </Box>
       </Flex>
     </PageTemplate>

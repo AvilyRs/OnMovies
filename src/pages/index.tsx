@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { Button } from "../components/form/Button";
@@ -9,6 +9,7 @@ import { LoginProps } from "./interface";
 
 export default function Home(): JSX.Element {
   const router = useRouter();
+  const toast = useToast();
 
   const [email, setEmail] = useState<InputTypesProps>("");
   const [password, setPassword] = useState<InputTypesProps>("");
@@ -16,9 +17,24 @@ export default function Home(): JSX.Element {
   async function loginValidate(data: LoginProps): Promise<boolean> {
     try {
       await loginSchema.validate(data);
+      toast({
+        title: "Sucesso!",
+        description: "Você foi logado com sucesso!",
+        status: "success",
+        duration: 3000,
+        position: "top-right"
+      });
       return true;
     } catch(err) {
-      console.log(err);
+      err.errors.forEach(message => {
+        toast({
+          title: "Oops!",
+          description: message,
+          status: "error",
+          duration: 3000,
+          position: "top-right"
+        });
+      });
       return false;
     }
   }
