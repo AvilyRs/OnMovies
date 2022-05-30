@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Icon } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { CustomHead } from "../../CustomHead";
 import { Navbar } from "../../Navbar";
 import { PageTemplateProps } from "./interface";
 
@@ -9,6 +10,7 @@ export function PageTemplate({ children, section, isDetails = false }: PageTempl
 
   return (
     <Box>
+      {section?.title && <CustomHead title={section.title} />}
       <Navbar />
       <Box
         mx="auto"

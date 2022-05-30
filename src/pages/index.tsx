@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, Stack, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { CustomHead } from "../components/CustomHead";
 import { Button } from "../components/form/Button";
 import { Input } from "../components/form/Input";
 import { loginSchema } from "../schemas/login.schema";
@@ -56,6 +57,7 @@ export default function Home(): JSX.Element {
     width="100vw"
     direction="column"
    >
+    <CustomHead title="Entrar" />
     <Heading mb="8" color="purple.600">
        OnMovies
     </Heading>
